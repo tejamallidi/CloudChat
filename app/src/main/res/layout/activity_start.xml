@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#DAE0E2"
+    android:orientation="vertical"
+    tools:context=".StartActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cloud Chat"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/login"
+        android:layout_marginTop="75dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="Login"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:background="@drawable/buttons"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/title"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/register"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="Register"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/buttons"
+        android:layout_below="@+id/login"
+        />
+
+</LinearLayout>
