@@ -15,6 +15,7 @@ import com.dev.surya.cloudchat.Fragments.ChatsFragment;
 import com.dev.surya.cloudchat.MessageActivity;
 import com.dev.surya.cloudchat.Model.Message;
 import com.dev.surya.cloudchat.Model.User;
+import com.dev.surya.cloudchat.ProfileActivity;
 import com.dev.surya.cloudchat.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -81,7 +82,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, MessageActivity.class);
+                Intent intent = new Intent(mContext, ProfileActivity.class);
                 intent.putExtra("userid", user.getId());
                 mContext.startActivity(intent);
             }
@@ -98,7 +99,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView username, lastMessage, count;
+        private TextView username, lastMessage;
         private ImageView profileImage;
         private ImageView imageOnline;
         private ImageView imageOffline;
@@ -111,7 +112,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             imageOnline = itemView.findViewById(R.id.img_online);
             imageOffline = itemView.findViewById(R.id.img_offline);
             lastMessage = itemView.findViewById(R.id.last_message);
-            count = itemView.findViewById(R.id.unread_count);
         }
     }
 

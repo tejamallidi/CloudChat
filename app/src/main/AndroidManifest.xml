@@ -53,9 +53,11 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".SettingsActivity"
+        <activity
+            android:name=".SettingsActivity"
             android:parentActivityName=".MainActivity"
-            android:windowSoftInputMode="stateHidden" ></activity>
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

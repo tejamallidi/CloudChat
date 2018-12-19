@@ -58,24 +58,11 @@
         android:layout_below="@+id/username"
         android:layout_toRightOf="@+id/profile_image"
         android:layout_marginTop="1dp"
-        android:text="Testing"
+        android:text=""
         android:id="@+id/last_message"
         android:textColor="#000"
         android:layout_marginStart="10dp"
         android:maxLines="1"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="1dp"
-        android:text="count"
-        android:visibility="invisible"
-        android:id="@+id/unread_count"
-        android:textColor="#000"
-        android:layout_marginStart="10dp"
         />
 
 </RelativeLayout>

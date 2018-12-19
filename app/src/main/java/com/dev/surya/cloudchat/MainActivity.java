@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.dev.surya.cloudchat.Fragments.ChatsFragment;
 import com.dev.surya.cloudchat.Fragments.ProfileFragment;
+import com.dev.surya.cloudchat.Fragments.RequestFragment;
 import com.dev.surya.cloudchat.Fragments.UsersFragment;
 import com.dev.surya.cloudchat.Model.ChatList;
 import com.dev.surya.cloudchat.Model.Message;
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     viewPagerAdapter.addFragment(new ChatsFragment(), "("+unread+") Chats");
                 }
                 viewPagerAdapter.addFragment(new UsersFragment(), "Users");
-               // viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");
+               viewPagerAdapter.addFragment(new RequestFragment(), "Requests");
 
                 viewPager.setAdapter(viewPagerAdapter);
 
