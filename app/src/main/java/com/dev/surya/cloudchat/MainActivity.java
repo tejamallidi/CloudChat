@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         profileImage = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     viewPagerAdapter.addFragment(new ChatsFragment(), "("+unread+") Chats");
                 }
                 viewPagerAdapter.addFragment(new UsersFragment(), "Users");
-                viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");
+               // viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");
 
                 viewPager.setAdapter(viewPagerAdapter);
 
@@ -120,6 +120,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(currentUser == null) {
+            SendUserToLoginActivity();
+        } else {
+            status("online");
+            verifyUserExistence();
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
@@ -130,6 +144,9 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
 
+            case R.id.profile:
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                return true;
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(MainActivity.this, StartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -173,6 +190,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void verifyUserExistence() {
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.child("username").exists())
+                    SendUserToSettingsActivity();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
 
 
     private void status(String status){
@@ -195,5 +228,16 @@ public class MainActivity extends AppCompatActivity {
 
         if(firebaseUser != null)
             status("offline");
+    }
+
+    private void SendUserToSettingsActivity() {
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    private void SendUserToLoginActivity() {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+
     }
 }

@@ -4,10 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:background="#DAE0E2"
     android:orientation="vertical"
     tools:context=".StartActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            layout="@layout/appbar_layout"
+            android:id="@+id/main_page_toolbar">
+        </include>
+
+
+    </android.support.design.widget.AppBarLayout>
 
     <TextView
         android:id="@+id/title"
@@ -16,12 +28,23 @@
         android:text="Cloud Chat"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:textColor="#2F363F"
+        android:layout_marginTop="140dp"
+        android:layout_marginStart="130dp"
         />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher_round"
+        android:layout_marginTop="15dp"
+        />
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/login"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="10dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"

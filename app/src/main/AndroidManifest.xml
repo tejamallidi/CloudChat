@@ -32,8 +32,9 @@
         <activity
             android:name=".MessageActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".ResetPasswordActivity"
-            android:parentActivityName=".LoginActivity"/>
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:parentActivityName=".LoginActivity" />
 
         <service
             android:name=".Notifications.MyFirebaseIdService"
@@ -43,7 +44,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name=".Notifications.MyFirebaseMessaging"
             android:enabled="true"
@@ -53,7 +53,9 @@
             </intent-filter>
         </service>
 
-
+        <activity android:name=".SettingsActivity"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" ></activity>
     </application>
 
 </manifest>

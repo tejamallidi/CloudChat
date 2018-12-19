@@ -13,7 +13,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_below="@+id/toolbar"
@@ -23,19 +23,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="70dp"
             android:text="Create a new account"
             android:textSize="20dp"
             android:textStyle="bold"
+            android:textColor="#2C3335"
             />
         
         <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content" 
             android:id="@+id/username"
+            android:inputType="text"
             android:background="@drawable/inputs"
             android:layout_marginTop="10dp"
             app:met_floatingLabel="normal"
+            android:drawableStart="@drawable/edit_profile"
+            android:drawableTint="#7B8788"
             android:hint="Username"
             />
         
@@ -47,6 +51,7 @@
             android:layout_marginTop="10dp"
             app:met_floatingLabel="normal"
             android:background="@drawable/inputs"
+            android:drawableStart="@drawable/email"
             android:hint="Email"
             />
 
@@ -58,6 +63,7 @@
             android:background="@drawable/inputs"
             android:layout_marginTop="10dp"
             app:met_floatingLabel="normal"
+            android:drawableStart="@drawable/password"
             android:hint="Password"
             />
 
@@ -66,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:text="Create Account"

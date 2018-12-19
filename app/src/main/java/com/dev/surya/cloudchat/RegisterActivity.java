@@ -94,6 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 HashMap<String, String> hashMap = new HashMap<>();
                                 hashMap.put("id", userId);
                                 hashMap.put("username", username);
+                                hashMap.put("userstatus", "Available");
                                 hashMap.put("imageURL", "default");
                                 hashMap.put("status", "offline");
                                 hashMap.put("search", username.toLowerCase());
