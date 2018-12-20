@@ -32,13 +32,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private Context mContext;
     private List<User> mUsers;
-    private boolean isOnline;
-    private String theLastMessage;
 
-    public UserAdapter(Context mContext, List<User> mUsers, boolean isOnline) {
+    public UserAdapter(Context mContext, List<User> mUsers) {
         this.mContext = mContext;
         this.mUsers = mUsers;
-        this.isOnline = isOnline;
     }
 
     @NonNull
@@ -56,25 +53,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             holder.profileImage.setImageResource(R.drawable.profile_image);
         } else {
             Glide.with(mContext).load(user.getImageURL()).into(holder.profileImage);
-        }
-
-        if(isOnline){
-            lastMessage(user.getId(), holder.lastMessage);
-        } else {
-            holder.lastMessage.setVisibility(View.INVISIBLE);
-        }
-
-        if(isOnline){
-            if(user.getStatus().equals("online")){
-                holder.imageOnline.setVisibility(View.VISIBLE);
-                holder.imageOffline.setVisibility(View.INVISIBLE);
-            } else{
-                holder.imageOnline.setVisibility(View.INVISIBLE);
-                holder.imageOffline.setVisibility(View.VISIBLE);
-            }
-        } else {
-            holder.imageOnline.setVisibility(View.INVISIBLE);
-            holder.imageOffline.setVisibility(View.INVISIBLE);
         }
 
 
@@ -99,59 +77,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView username, lastMessage;
+        private TextView username;
         private ImageView profileImage;
-        private ImageView imageOnline;
-        private ImageView imageOffline;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             username = itemView.findViewById(R.id.username);
             profileImage = itemView.findViewById(R.id.profile_image);
-            imageOnline = itemView.findViewById(R.id.img_online);
-            imageOffline = itemView.findViewById(R.id.img_offline);
-            lastMessage = itemView.findViewById(R.id.last_message);
         }
     }
 
-    // check for last message
-    private void lastMessage(final String userid, final TextView lastMessage) {
-        theLastMessage = "default";
-        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser != null) {
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Chats");
-
-            reference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Message message = snapshot.getValue(Message.class);
-                        assert message != null;
-                        if (message.getReceiver().equals(firebaseUser.getUid()) && message.getSender().equals(userid) ||
-                                message.getReceiver().equals(userid) && message.getSender().equals(firebaseUser.getUid())) {
-                            theLastMessage = message.getMessage();
-                        }
-
-                    }
-                    switch (theLastMessage) {
-                        case "default":
-                            lastMessage.setText("No Message yet");
-                            break;
-
-                        default:
-                            lastMessage.setText(theLastMessage);
-                            break;
-                    }
-
-                    theLastMessage = "default";
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        }
-    }
 }

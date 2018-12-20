@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dev.surya.cloudchat.Adapter.ChatAdapter;
 import com.dev.surya.cloudchat.Adapter.UserAdapter;
 import com.dev.surya.cloudchat.Model.ChatList;
 import com.dev.surya.cloudchat.Model.Message;
@@ -32,11 +33,11 @@ import java.util.List;
 public class ChatsFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private UserAdapter userAdapter;
+    private ChatAdapter chatAdapter;
     private List<User> mUsers;
 
     FirebaseUser fuser;
-    DatabaseReference reference, userRef;
+    DatabaseReference reference;
 
     private List<ChatList> usersList;
 
@@ -69,7 +70,6 @@ public class ChatsFragment extends Fragment {
                     ChatList chatList = snapshot.getValue(ChatList.class);
                     usersList.add(chatList);
                 }
-
                 chatList();
             }
 
@@ -106,8 +106,8 @@ public class ChatsFragment extends Fragment {
                         }
                     }
                 }
-                userAdapter = new UserAdapter(getContext(), mUsers, true);
-                recyclerView.setAdapter(userAdapter);
+                chatAdapter = new ChatAdapter(getContext(), mUsers, true);
+                recyclerView.setAdapter(chatAdapter);
             }
 
             @Override

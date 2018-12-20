@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,7 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    private DatabaseReference usersRef, chatRequestRef, contactsRef, notificationRef;
+    private DatabaseReference usersRef, chatRequestRef, contactsRef, notificationRef,chatsRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
         chatRequestRef = FirebaseDatabase.getInstance().getReference().child("Chat Requests");
         contactsRef = FirebaseDatabase.getInstance().getReference().child("Contacts");
         notificationRef = FirebaseDatabase.getInstance().getReference().child("Notifications");
+        chatsRef = FirebaseDatabase.getInstance().getReference().child("Chatlist");
 
         receiverUserID = getIntent().getExtras().get("userid").toString();
         senderUserID = mAuth.getCurrentUser().getUid();
@@ -193,10 +195,12 @@ public class ProfileActivity extends AppCompatActivity {
                                             if(task.isSuccessful()){
                                                 sendMessageRequestButton.setEnabled(true);
                                                 currentState = "new";
+                                                removeChat();
                                                 sendMessageRequestButton.setText("Send Message Request");
                                                 sendMessageButton.setVisibility(View.INVISIBLE);
                                                 declineRequestButton.setVisibility(View.INVISIBLE);
                                                 declineRequestButton.setEnabled(false);
+
                                             }
                                         }
                                     });
@@ -310,5 +314,21 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
     }
-}
 
+    private void removeChat(){
+        final DatabaseReference chatRef=FirebaseDatabase.getInstance().getReference("Chatlist");
+        chatRef.child(receiverUserID).child(senderUserID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    chatRef.child(senderUserID).child(receiverUserID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(ProfileActivity.this, "Contact Deleted Successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+    }
+}

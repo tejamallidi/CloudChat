@@ -1,7 +1,6 @@
 package com.dev.surya.cloudchat;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -18,10 +17,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.dev.surya.cloudchat.Fragments.ChatsFragment;
-import com.dev.surya.cloudchat.Fragments.ProfileFragment;
 import com.dev.surya.cloudchat.Fragments.RequestFragment;
 import com.dev.surya.cloudchat.Fragments.UsersFragment;
-import com.dev.surya.cloudchat.Model.ChatList;
 import com.dev.surya.cloudchat.Model.Message;
 import com.dev.surya.cloudchat.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,7 +28,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -98,14 +94,14 @@ public class MainActivity extends AppCompatActivity {
                         unread++;
                     }
                 }
-
                 if(unread == 0){
                     viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
                 } else {
                     viewPagerAdapter.addFragment(new ChatsFragment(), "("+unread+") Chats");
                 }
                 viewPagerAdapter.addFragment(new UsersFragment(), "Users");
-               viewPagerAdapter.addFragment(new RequestFragment(), "Requests");
+
+                viewPagerAdapter.addFragment(new RequestFragment(), "Requests");
 
                 viewPager.setAdapter(viewPagerAdapter);
 

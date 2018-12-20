@@ -1,5 +1,7 @@
 package com.dev.surya.cloudchat;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -181,15 +183,15 @@ public class MessageActivity extends AppCompatActivity {
 
         reference.child("Chats").push().setValue(hashMap);
 
-        // add user to chat fragment
+        //add user to fragment
         final DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
-                .child(fuser.getUid()).child(userid);
+                .child(receiver).child(fuser.getUid());
 
         chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(!dataSnapshot.exists()){
-                    chatRef.child("id").setValue(userid);
+                    chatRef.child("id").setValue(fuser.getUid());
                 }
             }
 
